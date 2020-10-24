@@ -1,0 +1,48 @@
+# NUTS 2016
+Complete metadata in metadata.pdf file. See also http://ec.europa.eu/eurostat/web/nuts/overview
+
+## File naming
+
+### Pattern
+Theme_Spatialtype_Resolution_Year_Projection_Subset.Format
+*example*: NUTS_RG_01M_2016_3035.geojson
+
+### Theme: NUTS
+
+### Spatialtype: BN/RG/LB
+* BN: boundaries (multilines)
+* RG: regions (multipolygons)
+* LB: labels (points)
+
+### Resolution: 60M/20M/10M/03M/01M
+Resolution is the map scale the data is optimized (generalized) for.
+
+### Year: 2016 (years available: 2021/2016/2013/2010/2006/2003)
+The year of NUTS regulation. See http://ec.europa.eu/eurostat/web/nuts/history
+
+### Projection: 4326/3035/3857
+4-digit EPSG code, see http://spatialreference.org/ref/epsg/
+* *4326* - WGS84, coordinates in decimal degrees
+* *3035* - ETRS 1989 in Lambert Azimutal projection with centre in E52N10, coordinates in meters
+* *3857* - WGS84 Web Mercator Auxiliary Sphere, coordinates in meters
+
+### Format: gdb/shp.zip/geojson/json/pbf/svg.zip
+* *gdb* - file geodatabase (ESRI) http://desktop.arcgis.com/en/arcmap/10.3/manage-data/administer-file-gdbs/file-geodatabases.htm
+* *shp.zip* - zipped shapefile (ESRI) http://downloads.esri.com/support/whitepapers/mo_/shapefile.pdf
+* *geojson* - http://geojson.org
+* *json* - topoJSON https://github.com/topojson/topojson-specification
+* *pbf (geobuf)* - geojson compressed into protocol buffers, see https://github.com/mapbox/geobuf
+* *svg.zip* - zipped SVG (scalable vector graphics) https://www.w3.org/TR/SVG2/
+
+---------
+Release notes  
+* 2018-01-09 Data reprojected into EPSG:4326,EPSG:3035,EPSG:3857. More strict quality control. Known issues documented in https://webgate.ec.europa.eu/CITnet/jira/browse/GISCO-1582  
+* 2018-02-22 Major release of API V2. 1) single countries are available as separate geojson files, 2) map viewer is enabled for geojson, 3) downloadable zip packages now consist of gdb/shp/geojson/topojson/csv (attributes) as well as metadata, 4) zip packages are integrated into API.2019-07-18 Communes 2008, 2006, 2004, 2001 addded.  
+* 2019-07-18 Communes 2008, 2006, 2004, 2001 added.  
+* 2020-01-21 Added: communes 2008/2006/2004/2001, local administrative units 2018/2017/2016, urban audit 2018/2014. Additional NUTS 2016 classification: mountain, urban/rural, coastal.  
+* 2020-02-27 Added: NUTS 2021.  
+* 2020-04-06 Added: countries 2020.  
+* 2020-07-06 Added: Urban Audit 2004, Urban Audit 2001, Local Administrative Units 2019.  
+* 2020-09-11 Added: field NAME_LATN in NUTS 2021, 2016, 2013, 2010, 2006.  
+* 2020-09-25 Fixed: incorrect NUTS_BN_20M_2021.EFTA_FLAG='T' for some boundaries of AL, TK, RS.
+* 2020-09-29 Re-assignment of NUTS3 codes for Albania.

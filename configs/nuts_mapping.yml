@@ -1,0 +1,87 @@
+---
+# Fix mapping due to ambiguous circumstances
+mapping:
+  BG412X: BG412
+  PL92X: PL92
+  NOG303: NO011
+  NOG311: NO043
+  NOG315: NO053
+  NOG318: NO071
+  NOG350: NO06
+  # Excel...
+  '2001-12-01 00:00:00': DEC01
+  '2002-12-01 00:00:00': DEC02
+  '2003-12-01 00:00:00': DEC03
+  '2004-12-01 00:00:00': DEC04
+  '2005-12-01 00:00:00': DEC05
+  '2006-12-01 00:00:00': DEC06
+
+# Duplicates or non-nuts countries to delete
+delete:
+  - GL
+  - DE80E
+  - IM
+  - IS
+  - S08000015
+  - S08000016 
+  - S08000017 
+  - S08000019 
+  - S08000020 
+  - S08000022 
+  - S08000024 
+  - S08000025 
+  - S08000026 
+  - S08000028 
+  - S08000029 
+  - S08000030 
+  - S08000031 
+  - S08000032 
+  - W11000023 
+  - W11000024 
+  - W11000025 
+  - W11000026 
+  - W11000027 
+  - W11000028 
+  - W11000029 
+  - PT113
+  - PT117
+  - PT16C
+  - PT182
+  - PT183
+  - PTG301
+  - PTG302
+  - PTG303
+  - PTG304
+  - PTG305
+  - PTG306
+  - PTG307
+  - NOG330
+  - NOG334
+  - NOG338
+  - NOG342
+  - NOG346
+  - NOG354
+  - ISG31
+  - ISG32
+  - ISG33
+  - ISG34
+  - ISG35
+  - ISG36
+  - ISG37
+  - ISG39
+  - EEG11212
+  - EEG11213
+  - EEG11214
+  - EEG11215
+  - EEG11216
+  - EEG11217
+  - EEG11218
+  - EEG11219
+  - EEG11220
+  - EEG11221
+  - EEG11222
+  - EEG11223
+  - EEG11224
+  - EEG11225
+  - EEG11226
+...
