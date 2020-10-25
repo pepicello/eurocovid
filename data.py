@@ -6,21 +6,17 @@ import geojson
 import pandas as pd
 import requests
 import yaml
-from bs4 import BeautifulSoup
 from loguru import logger
 
-daily = "https://www.ecdc.europa.eu/en/publications-data/subnational-14-day-notification-rate-covid-19"
-weekly = "https://www.ecdc.europa.eu/en/publications-data/weekly-subnational-14-day-notification-rate-covid-19"
+daily = "https://opendata.ecdc.europa.eu/covid19/subnationalcasedaily/xlsx"
+weekly = "https://opendata.ecdc.europa.eu/covid19/subnationalcaseweekly/xlsx"
 data_links = {"daily": daily, "weekly": weekly}
 logger.add("logs/main.txt")
 
 if __name__ == "__main__":
 
     # Retrieve
-    for freq, links in data_links.items():
-        resp = requests.get(links)
-        soup = BeautifulSoup(resp.text, "html.parser")
-        link = [x.get("href") for x in soup.find_all("a") if "xlsx" in str(x)][0]
+    for freq, link in data_links.items():
         xlsx = requests.get(link, allow_redirects=True)
         with open(f"data/{freq}.xlsx", "wb") as f:
             f.write(xlsx.content)

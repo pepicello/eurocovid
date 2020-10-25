@@ -131,3 +131,4 @@ The following packages are required to run this web-app locally: pandas for data
 
 ### Web implementation
 
+The app runs locally on localhost, but can also be implemented online.
