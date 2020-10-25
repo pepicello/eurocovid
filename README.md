@@ -131,4 +131,4 @@ The following packages are required to run this web-app locally: pandas for data
 
 ### Web implementation
 
-The app runs locally on localhost, but can also be implemented online.
+The app runs locally on localhost, but I have implemented an online version at [quant-arxiv-sanity.com:81/](http://quant-arxiv-sanity.com:81/). I am using a different port of an old domain name of mine, to save costs, which explains the unrelated name. The app fetches the data daily at 23:55 UTC from ECDC and updates the chart automatically.
