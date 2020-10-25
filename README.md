@@ -4,7 +4,7 @@ This project displays the 14-day notification rate of newly reported COVID-19 ca
 
 Some regions are updated daily, others are updated weekly, on Wednesdays. Hovering on each region shows the numeric data, along with the name of the region, country and update date for the data.
 
-![user interface](https://github.com/pepicello/eurocovid/blob/master/ui.jpg?raw=true)
+![user interface](https://github.com/pepicello/eurocovid/blob/master/ui.png?raw=true)
 
 ## Data sources
 
