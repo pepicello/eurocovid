@@ -9,7 +9,6 @@ from dash.dependencies import Input, Output
 
 geometry = pd.read_pickle("data/geom.pkl").to_dict()
 data = pd.read_pickle("data/data.pkl")
-curr_data = pd.read_pickle("data/curr_data.pkl")
 latest = data["date"].max().strftime("%Y-%m-%d")
 date_dict = (
     data["date"]
@@ -60,15 +59,12 @@ def display_value(time_idx):
 
 @app.callback(Output("map", "figure"), [Input("time_slider", "value")])
 def map_gen(time_idx):
-    if time_idx == last_date_idx:
-        plot_data = curr_data
-    else:
-        plot_data = data.loc[data["date"] <= date_dict[time_idx]]
-        plot_data = (
-            plot_data.groupby("nuts_code")
-            .apply(lambda x: x.sort_values("date").iloc[-1])
-            .reset_index(drop=True)
-        )
+    plot_data = data.loc[data["date"] <= date_dict[time_idx]]
+    plot_data = (
+        plot_data.groupby("nuts_code")
+        .apply(lambda x: x.sort_values("date").iloc[-1])
+        .reset_index(drop=True)
+    )
     fig = go.Figure(
         go.Choroplethmapbox(
             geojson=geometry,
