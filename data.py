@@ -44,6 +44,9 @@ if __name__ == "__main__":
     data["nuts_code"] = data["nuts_code"].astype(str).replace(nuts_dict, regex=True)
     data = data.loc[~data.nuts_code.isin(nuts_mapping["delete"])]
 
+    # Round number of cases
+    data["rate_14_day_per_100k"] = data["rate_14_day_per_100k"].round()
+    
     # geoJson for nuts codes (EU)
     geometry = {}
     for level in [0, 1, 2, 3]:
