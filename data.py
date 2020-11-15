@@ -8,8 +8,8 @@ import requests
 import yaml
 from loguru import logger
 
-daily = "https://opendata.ecdc.europa.eu/covid19/subnationalcasedaily/xlsx"
-weekly = "https://opendata.ecdc.europa.eu/covid19/subnationalcaseweekly/xlsx"
+daily = "https://opendata.ecdc.europa.eu/covid19/subnationalcasedaily/csv"
+weekly = "https://opendata.ecdc.europa.eu/covid19/subnationalcaseweekly/csv"
 data_links = {"daily": daily, "weekly": weekly}
 logger.add("logs/main.txt")
 
@@ -17,16 +17,16 @@ if __name__ == "__main__":
 
     # Retrieve
     for freq, link in data_links.items():
-        xlsx = requests.get(link, allow_redirects=True)
-        with open(f"data/{freq}.xlsx", "wb") as f:
-            f.write(xlsx.content)
+        csv_file = requests.get(link, allow_redirects=True)
+        with open(f"data/{freq}.csv", "wb") as f:
+            f.write(csv_file.content)
     logger.info("Data retrieved from ECDC")
 
     # Process
-    files = {"daily": Path("./data/daily.xlsx"), "weekly": Path("./data/weekly.xlsx")}
-    all_data = pd.DataFrame()
+    files = {"daily": Path("./data/daily.csv"), "weekly": Path("./data/weekly.csv")}
+    data = pd.DataFrame()
     for freq, file in files.items():
-        df = pd.read_excel(file)
+        df = pd.read_csv(file)
         if freq == "weekly":
             # Updated every Wed
             fmt = "%Y-W%W-%w"
@@ -35,14 +35,7 @@ if __name__ == "__main__":
             df.drop("year_week", axis=1, inplace=True)
         elif freq == "daily":
             df["date"] = pd.to_datetime(df.date)
-        all_data = all_data.append(df)
-
-    # Gets most recent figure
-    data = (
-        all_data.groupby("nuts_code")
-        .apply(lambda x: x.sort_values("date").iloc[-1])
-        .reset_index(drop=True)
-    )
+        data = data.append(df)
 
     # Manual fixes
     with open("configs/nuts_mapping.yml", "r") as f:
@@ -79,7 +72,15 @@ if __name__ == "__main__":
         logger.error("Mismatch is NUTS, please check data")
         raise ValueError("Mismatch is NUTS, please check data")
 
+    # Gets most recent figure
+    curr_data = (
+        data_with_geom.groupby("nuts_code")
+        .apply(lambda x: x.sort_values("date").iloc[-1])
+        .reset_index(drop=True)
+    )
+
     # Save processed data
     pd.Series(geometry).to_pickle("data/geom.pkl")
     data_with_geom.to_pickle("data/data.pkl")
+    curr_data.to_pickle("data/curr_data.pkl")
     logger.info("Data processed and saved!")
