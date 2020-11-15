@@ -1,4 +1,4 @@
-data/*.xlsx
+data/*.csv
 data/*.pkl
 logs/
 *.pyc
